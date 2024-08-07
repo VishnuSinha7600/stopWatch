@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        body{
+            display: flex;
+            justify-content: center;
+            align-self: center;
+            background-color: skyblue;
+            margin: auto;
+
+        }
+
+        div#stopwatch{
+            width: 400px;
+            height: 250px;
+            /* border: 1px solid black; */
+            text-align: center;
+            margin-top: 100px;
+            box-shadow: 1px 10px 10px;
+        }
+
+        h1{
+            font-size: 35px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin: 50px;
+        }
+
+        button{
+            margin-left: 10px;
+            width: 100px;
+            height: 40px;
+            border:  none;
+            border-radius: 10px;
+            box-shadow: 1px 0px 5px;
+        }
+
+        button:nth-of-type(2){
+            background-color: rgb(0, 60, 255);
+            width:120px;
+            height: 50px;
+            border:  none;
+            border-radius: 10px;
+            box-shadow: 1px 0px 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <div id="stopwatch">
+        <h1 id="displayTime">00 : 00</h1>
+        <button id="stopbtn" onclick="stopWatch()">Stop</button>
+        <button id="startbtn" onclick="watchStart()">Start</button>
+        <button id="resetbtn" onclick="resetWatch()">Reset</button>
+    </div>
+
+</body>
+
+<script>
+
+
+let [seconds , minutes] = [0,0];
+
+let displayTime = document.getElementById("displayTime");
+let timer = null
+
+function stopwatch(){
+
+seconds++
+
+if(seconds == 60){
+    seconds = 0;
+    minutes++
+}
+
+let scnds = seconds < 10 ? "0"+seconds : seconds 
+let mnts = minutes < 10 ? "0"+minutes : minutes
+
+displayTime.innerHTML = `${mnts} : ${scnds}`;
+}
+
+function watchStart(){
+    if(timer !== null){
+        clearInterval(timer)
+    }
+    timer = setInterval(stopwatch , 1000)
+}
+
+function stopWatch(){
+    clearInterval(timer);
+    timer = null;
+}
+
+
+function resetWatch(){
+    clearInterval(timer)
+    timer = null;
+    [seconds , minutes] = [0, 0];
+    displayTime.innerHTML = "00 : 00";
+
+
+}
+
+
+
+</script>
+</html>
